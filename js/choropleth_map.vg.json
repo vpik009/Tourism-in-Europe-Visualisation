@@ -5,7 +5,7 @@
   "background": "#EEEADD",
   "projection": {"type": "equalEarth"},
   "data": {
-    "url": "https://raw.githubusercontent.com/VladislavPikulin/FIT3179/main/Work/Week9HW/js/output.topo.json",
+    "url": "https://raw.githubusercontent.com/vpik009/Tourism-in-Europe-Visualisation/main/js/output.topo.json",
     "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
   },
 
@@ -28,7 +28,7 @@
         "lookup": "properties.SU_A3",
         "from": {
           "data": {
-            "url": "https://raw.githubusercontent.com/VladislavPikulin/FIT3179/main/Work/Assignment_2/data/modified/tourism_in_europe_by_country.csv"
+            "url": "https://raw.githubusercontent.com/vpik009/Tourism-in-Europe-Visualisation/main/data/modified/tourism_in_europe_by_country.csv"
           },
           "key": "Country Code",
           "fields": ["Country Name","Average"]
