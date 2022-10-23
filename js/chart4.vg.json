@@ -1,0 +1,136 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 650,
+  "height": 400,
+  "background": "#EEEADD",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    },
+    "axis": {
+      "grid": true,
+      "gridColor": "#c4a6a6"
+    }
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/VladislavPikulin/FIT3179/main/Work/Week10HW/data/modified/cost_of_living_2019.csv"
+  },
+  "params": [
+    {
+      "name": "Tourist_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000000,
+        "step": 1000000,
+        "name": "Minimum Tourists: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum['GDP per capita'] > 0"},
+    {"filter": "datum['Cost of Living Index'] > 0"},
+    {"filter": "datum['Number of Tourists'] > Tourist_Above"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "Cost of Living Index",
+      "type": "quantitative",
+      "title": "Cost of Living Index",
+      "axis": {"tickCount": 7},
+      "scale": {"type": "linear", "domain": [1, 150]}
+    },
+    "y": {
+      "field": "GDP per capita",
+      "type": "quantitative",
+      "axis": {"tickCount": 6},
+      "scale": {"type": "linear", "domain": [1, 130000]}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "circle"},
+      "encoding": {
+        "color": {
+          "condition": [
+              {"test": "datum['Country'] == 'France'", "value": "#2fa1da"},
+              {"test": "datum['Country'] == 'Germany'", "value": "#694e52"},
+              {"test": "datum['Country'] == 'Portugal'", "value": "#121214"},
+              {"test": "datum['Country'] == 'Norway'", "value": "#29d95d"},
+              {"test": "datum['Country'] == 'Switzerland'", "value": "#fbb845"},
+              {"test": "datum['Country'] == 'Ireland'", "value": "#4D3211"},
+              {"test": "datum['Country'] == 'Luxembourg'", "value": "#EC7849"},
+              {"test": "datum['Country'] == 'Ukraine'", "value": "#096344"}
+          ],
+          "value": "#801336"
+        },
+        "size": {
+          "field": "Number of Tourists",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [1000000, 10000000, 50000000, 100000000, 200000000],
+            "range": [15, 75, 225, 300, 450, 700]
+          },
+          "legend": {"format": ".1s"}
+        },
+        "opacity": {"value": 0.6},
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "Number of Tourists", "type": "quantitative", "format": ","},
+          {"field": "GDP per capita", "type": "quantitative", "format": ",.2f"},
+          {
+            "field": "Cost of Living Index",
+            "type": "quantitative",
+            "format": ",.2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Country'] == 'France' || datum['Country'] == 'Ukraine' || datum['Country'] == 'Germany' || datum['Country'] == 'Portugal'|| datum['Country'] == 'Switzerland'|| datum['Country'] == 'Luxembourg'|| datum['Country'] == 'Norway'|| datum['Country'] == 'Ireland'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark":{
+        "type":"line",
+        "color":"#3B444B"
+      },
+      "transform":[{
+        "regression": "GDP per capita",
+        "on": "Cost of Living Index",
+        "extent": [2, 140]
+      }],
+      "encoding": {
+        "y":{
+          "field":"GDP per capita",
+          "type":"quantitative"
+        },
+        "x":{
+          "field":"Cost of Living Index",
+          "type":"quantitative"
+        }
+      }
+    }
+  ]
+}

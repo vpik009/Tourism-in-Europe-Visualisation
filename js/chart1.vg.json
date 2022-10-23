@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 400,
+  "background": "#EEEADD",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    },
+    "axis": {
+      "grid": true,
+      "gridColor": "#c4a6a6"
+    }
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/VladislavPikulin/FIT3179/main/Work/Assignment_2/data/modified/tourism_europe_total_per_country_aggr.csv"
+  },
+  "encoding": {
+      "x": {"timeUnit": "yearmonth", 
+            "field": "Year", 
+            "axis": {"format": "%Y"},
+            "title":"Year"
+            },
+      "y": {"aggregate": "sum", "field": "Tourists",
+      "axis": {"domain": ["2018"]}},
+      "color": {
+        "field": "Country", 
+        "scheme": "tableau10"
+      },
+      "tooltip": [
+        {"field": "Country", "type": "nominal"},
+        {"field": "Year", "type": "temporal","format": "%Y"},
+        {"field": "Tourists", "type": "quantitative", "format": ","}
+      ]
+    },
+
+  
+  "layer":[{
+    
+    "params": [{
+          "name": "brush",
+          "select": {"type": "interval", "encodings": ["x","y"]}
+        }],
+
+    "mark": {"type":"area","point": true}
+
+  },{
+    "transform": [
+      {"filter": {"param": "brush"}}
+    ],
+    "mark": {"type": "area", "color": "goldenrod"}
+  },
+
+
+  {
+    "mark": {
+        "type": "text",
+        "align": "center",
+        "dx": 200,
+        "dy": -320,
+        "baseline": "middle",
+        "fontSize": 10,
+        "fontStyle": "italic"
+    },
+    "encoding": {
+        "text": {"field": "Annotation", "type": "nominal"},
+        "color":{"value":"black"}
+        
+    }
+  }
+    ]
+}
+

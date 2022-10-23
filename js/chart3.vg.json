@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 440,
+  "height": 330,
+  "background": "#EEEADD",
+  "description": "A donut chart representing the number of tourists that visit each country on average.",
+  "data": 
+      {
+        "name": "table",
+        "values": [ {"country":"France","value":199231062.5, "percent":23.56},
+                    {"country":"Spain","value":98706350, "percent":11.67},
+                    {"country":"Italy","value":73569280.1, "percent":8.70},
+                    {"country":"Poland","value":68472600, "percent":8.09},
+                    {"country":"Croatia","value":49382150, "percent":5.84},
+                    {"country":"Hungary","value":42129100, "percent":4.98},
+                    {"country":"United Kingdom","value":32233250, "percent":3.81},
+                    {"country":"Denmark","value":27216176.5, "percent":3.22},
+                    {"country":"Germany","value":27428400, "percent":3.24},
+                    {"country":"Czechia","value":26812823.5, "percent":3.17},
+                    {"country":"Russia","value":24676600, "percent":2.92},
+                    {"country":"Greece","value":21517500, "percent":2.54},
+                    {"country":"Ukraine","value":18684100, "percent":2.21},
+                    {"country":"Slovakia","value":14526000, "percent":1.72},
+
+                    {"country":"Other","value":120995576.5, "percent":14.31}
+                    ]
+      },
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 100, "outerRadius": 320},
+      "encoding": {"tooltip":[
+                                {"field": "country", "type": "nominal", "title": "Country Name"} ,
+                                {"field": "value", "type": "quantitative", "title": "Avg. Number of Tourists", "format": ","}, 
+                                {"field": "percent", "type": "quantitative", "title": "% of Total: "}
+                              ],
+                    "color": {"field":"country", "scale":{"scheme": "tableau20"}}
+                  }
+    },
+    {
+      "mark": {"type": "text", "radius": 350, "fontSize": 15, "fontStyle":"bold", "color":"#3B444B"},
+      "encoding": {"text": {"field": "country", "type": "nominal"}}
+    }
+  ],
+  "encoding": {
+    "theta": {"field": "value", "type": "quantitative", "stack": true},
+    "color": {"legend": null}
+  },
+  "view": {"stroke": null}
+}

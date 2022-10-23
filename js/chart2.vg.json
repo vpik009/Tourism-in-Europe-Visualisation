@@ -1,0 +1,95 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 275,
+  "height": 220,
+  "background": "#EEEADD",
+  "description": "A basic radial plot that encodes two values as the angle and radius of an arc.",
+  "data": 
+    {
+      "name": "table",
+      "values": [
+        {
+          "category": "Jan",
+          "value": 36995000,
+          "startAngle": 0,
+          "endAngle": 0.3151529833074267
+        },
+        {
+          "category": "Feb",
+          "value": 37692000,
+          "startAngle": 0.3151529833074267,
+          "endAngle": 0.6362435697873166
+        },
+        {
+          "category": "Mar",
+          "value": 45518000,
+          "startAngle": 0.6362435697873166,
+          "endAngle": 1.0240022802667719
+        },
+        {
+          "category": "Apr",
+          "value": 56725000,
+          "startAngle": 1.0240022802667719,
+          "endAngle": 1.5072311754719017
+        },
+        {
+          "category": "May",
+          "value": 64043000,
+          "startAngle": 1.5072311754719017,
+          "endAngle": 2.052800644588202
+        },
+        {
+          "category": "Jun",
+          "value": 77462000,
+          "startAngle": 2.052800644588202,
+          "endAngle": 2.7126838826733453
+        },
+        {
+          "category": "Jul",
+          "value": 97635000,
+          "startAngle": 2.7126838826733453,
+          "endAngle": 3.544416860784458
+        },
+        {
+          "category": "Aug",
+          "value": 98575000,
+          "startAngle": 3.544416860784458,
+          "endAngle": 4.384157510318978
+        },
+        {
+          "category": "Sep",
+          "value": 77905000,
+          "startAngle": 4.384157510318978,
+          "endAngle": 5.047814576532388
+        },
+        {
+          "category": "Oct",
+          "value": 59350000,
+          "startAngle": 5.047814576532388,
+          "endAngle": 5.553405320127354
+        },
+        {
+          "category": "Nov",
+          "value": 42445000,
+          "startAngle": 5.553405320127354,
+          "endAngle": 5.914985760091774
+        },
+        {
+          "category": "Dec",
+          "value": 43222000,
+          "startAngle": 5.914985760091774,
+          "endAngle": 6.283185307179586
+        }
+      ]
+    },
+
+  "layer": [{
+    "mark": {"type": "arc", "innerRadius": 40, "stroke": "#fff"}
+  }],
+  "encoding": {
+    "theta": {"field": "value", "type": "quantitative", "stack": true},
+    "radius": {"field": "value", "scale": {"type": "sqrt", "zero": true, "rangeMin": 60, "rangeMax": 250}},
+    "color": {"value": "#801336"},
+    "tooltip": [{"field": "category", "type": "nominal","title":"Month"},{"field": "value", "type": "quantitative","title":"Number of Tourists", "format": ","}]
+  }
+}
